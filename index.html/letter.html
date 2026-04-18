@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Adil's Letter</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+.back-btn{
+position:fixed;
+bottom:25px;
+right:25px;
+z-index:9999;
+
+padding:12px 22px;
+font-size:0.9rem;
+cursor:pointer;
+
+/* glass effect */
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(6px);
+border:1px solid rgba(255,255,255,0.2);
+color:white;
+
+border-radius:10px;
+
+/* 3D effect */
+box-shadow:0 8px 20px rgba(0,0,0,0.4);
+
+transition:0.3s;
+}
+
+.back-btn:hover{
+transform:translateY(-3px) scale(1.05);
+box-shadow:0 15px 30px rgba(0,0,0,0.6);
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+min-height:100vh;   /* allow scroll if needed */
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px 0;     /* space top & bottom */
+font-family:'Playfair Display',serif;
+
+background:url("assets/letter-bg.jpg") no-repeat center center/cover;
+}
+body{
+overflow-y:auto;
+}
+/* ===== LETTER CONTENT ===== */
+
+.letter-box{
+width:60%;
+max-width:700px;
+padding:40px;
+text-align:center;
+
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(4px);
+border-radius:15px;
+
+box-shadow:0 20px 50px rgba(0,0,0,0.5);
+
+color:#2c1a0d;
+
+/* NEW */
+margin:40px 0;   /* space top & bottom */
+}
+
+/* ===== TITLE ===== */
+
+.title{
+font-family:'Great Vibes', cursive;
+font-size:2.5rem;
+margin-bottom:20px;
+}
+
+/* ===== LETTER TEXT ===== */
+
+.content{
+font-size:1.2rem;
+line-height:1.8;
+}
+
+/* ===== BUTTON ===== */
+
+.btn{
+margin-top:30px;
+padding:10px 20px;
+border:none;
+cursor:pointer;
+
+background:rgba(0,0,0,0.5);
+color:white;
+border-radius:10px;
+
+transition:0.3s;
+}
+
+.btn:hover{
+background:black;
+}
+
+</style>
+</head>
+<button class="back-btn" onclick="goBack()">← Back</button>
+<body>
+    <audio id="bgMusic" loop>
+  <source src="assets/piano.mp3" type="audio/mpeg">
+</audio>
+
+<div class="letter-box">
+
+<div class="title">Adil's Letter</div>
+
+<div class="content">
+
+Meera,<br><br>
+
+If you’re reading this, it means I couldn’t come back.  
+I’m sorry I couldn’t say this to you in person—I always imagined standing beside you, your voice rising, my drums answering.  
+But some songs end too soon.
+I wasn’t afraid of dying. I was afraid of leaving things unfinished—Aarav, my music… and you.<br><br>
+Then you came into my life like rain after a long drought.  
+Your voice didn’t just fill silence—it healed it.  
+For the first time since Aarav was gone, music felt like forgiveness, not pain.<br><br>
+So promise me this—<br><br>
+Don’t choose silence.<br>
+Sing, even when it hurts.<br>
+And when you sing our song, don’t make it a goodbye.  
+Sing it like we’re still there, together.<br><br>
+If you ever hear distant drums in the rain, don’t be afraid.  
+It’s just me… keeping rhythm for you.<br><br>
+And Meera—  
+Loving you was the bravest thing I ever did.<br><br>
+So live loudly. Love deeply.  
+And when the rain falls, know my heartbeat still echoes your name.<br><br>
+
+<div style="margin-top:30px; text-align:right; font-family:'Great Vibes',cursive; font-size:1.5rem;">
+Always yours,<br>
+Adil ❤️
+</div>
+
+
+
+</div>
+
+<script>
+    const bgMusic = document.getElementById("bgMusic");
+
+// LOAD FROM SAME TIME
+window.addEventListener("load", () => {
+let savedTime = localStorage.getItem("musicTime");
+
+if(savedTime){
+bgMusic.currentTime = savedTime;
+}
+
+bgMusic.play().catch(()=>{});
+});
+
+// KEEP SAVING TIME
+setInterval(() => {
+localStorage.setItem("musicTime", bgMusic.currentTime);
+}, 1000);
+    function goBack(){
+window.history.back();
+}
+
+function goBack(){
+window.location.href = "main.html";
+}
+
+</script>
+
+</body>
+</html>
