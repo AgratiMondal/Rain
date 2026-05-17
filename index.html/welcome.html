@@ -278,6 +278,7 @@ let i = 0;
 
 let container = document.getElementById("typeText");
 let sound = document.getElementById("typeSound");
+let soundStarted = false;
 
 function typeWriter(){
 
@@ -311,12 +312,18 @@ line.appendChild(span);
 
 container.appendChild(line);
 
-sound.currentTime = 0;
+if(!soundStarted){
+
+sound.loop = true;
 
 let playPromise = sound.play();
 
 if(playPromise !== undefined){
 playPromise.catch(()=>{});
+}
+
+soundStarted = true;
+
 }
 
 i++;
@@ -325,8 +332,12 @@ setTimeout(typeWriter, 600);
 
 }else{
 
+setTimeout(()=>{
+
 sound.pause();
 sound.currentTime = 0;
+
+}, 500);
 
 }
 
@@ -337,11 +348,21 @@ window.onload = function(){
 typeWriter();
 };
 
-document.addEventListener("click", function(){
+document.addEventListener("click", () => {
+
+if(!soundStarted){
+
+sound.volume = 1;
+
 sound.play().then(()=>{
+
 sound.pause();
 sound.currentTime = 0;
+
 }).catch(()=>{});
+
+}
+
 }, { once:true });
 
 function goMain(){
