@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Song We Hid From the Rain</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:ital@1&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -282,6 +283,94 @@ to{transform:scale(1);opacity:1}
 from{transform:rotate(-8deg);opacity:0}
 to{transform:rotate(0);opacity:1}
 }
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* STORY BOX */
+.glass-box{
+width:95%;
+padding:20px;
+border-radius:18px;
+}
+
+/* STORY TEXT */
+#songNumber{
+font-size:1.8rem;
+}
+
+#songTopic{
+font-size:1.2rem;
+margin-bottom:20px;
+}
+
+#songContent{
+font-size:0.95rem;
+line-height:1.9;
+}
+
+/* BUTTONS */
+#nextBtn,
+#prevBtn,
+#homeBtn{
+
+position:fixed;
+z-index:999;
+
+padding:8px 14px;
+font-size:0.75rem;
+
+border-radius:10px;
+
+}
+
+/* NEXT BUTTON */
+#nextBtn{
+bottom:15px;
+right:15px;
+}
+
+/* PREVIOUS BUTTON */
+#prevBtn{
+bottom:15px;
+left:15px;
+}
+
+/* HOME BUTTON */
+#homeBtn{
+
+top:15px;
+left:15px;
+
+/* IMPORTANT */
+bottom:auto;
+
+padding:7px 12px;
+font-size:0.7rem;
+
+max-width:70px;
+
+}
+
+/* HERO TITLE */
+#heroSection h1{
+font-size:2rem !important;
+line-height:1.4;
+padding:0 10px;
+}
+
+}
+
 </style>
 </head>
 
@@ -327,6 +416,9 @@ Some songs are not heard… they are felt.
 <button class="btn" onclick="playTransition('story')">Enter the Story</button>
 <button class="btn" onclick="playTransition('audio')">Listen to the Story</button>
 <button class="btn" onclick="playTransition('letter')">Adil's Letter</button>
+<button class="btn" onclick="openTeacherPage()">
+For our Cutest Teacher ❤️
+</button>
 
 </section>
 
@@ -393,7 +485,9 @@ openLetter();
 function openLetter(){
 window.location.href = "letter.html";
 }
-
+function openTeacherPage(){
+window.location.href = "teacher.html";
+}
 /* ================= BACKGROUND MUSIC ================= */
 
 const bgMusic=document.getElementById("bgMusic");
@@ -487,11 +581,21 @@ document.getElementById("storySection").scrollTop=0;
 }
 
 function nextStory(){
-if(currentSong<songs.length-1){
+
+// IF LAST STORY (Song 15)
+if(currentSong === songs.length - 1){
+
+playEndVideo();
+return;
+
+}
+
+if(currentSong < songs.length - 1){
 currentSong++;
 updateButtons();
 showSong();
 }
+
 }
 
 function prevStory(){
@@ -613,6 +717,30 @@ requestAnimationFrame(drawRain);
 
 drawRain();
 
+function playEndVideo(){
+
+let container = document.getElementById("transitionVideo");
+let video = document.getElementById("butterflyVideo");
+
+// CHANGE VIDEO SOURCE
+video.src = "assets/end-story.mp4";
+
+container.style.display = "flex";
+
+video.currentTime = 0;
+video.play();
+
+// AFTER VIDEO ENDS
+video.onended = function(){
+
+container.style.display = "none";
+
+// GO BACK HOME
+goHome();
+
+};
+
+}
 </script>
 
 </body>
